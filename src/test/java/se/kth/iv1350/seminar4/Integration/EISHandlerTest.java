@@ -7,8 +7,10 @@ import org.junit.Test;
 import se.kth.iv1350.seminar4.DTO.*;
 import se.kth.iv1350.seminar4.integration.EISHandler;
 import se.kth.iv1350.seminar4.integration.ItemNotFoundException;
+import se.kth.iv1350.seminar4.integration.ServerDownException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class EISHandlerTest {
@@ -42,8 +44,32 @@ public class EISHandlerTest {
             assertEquals("Find item did not find correct item", foundItem.getPrice(), itemWithIdentifierTwo.getPrice(), .01);
             assertEquals("Find item did not find correct item", foundItem.getDescription(), itemWithIdentifierTwo.getDescription());
             assertEquals("Find item did not find correct item", foundItem.getIdentifier(), itemWithIdentifierTwo.getIdentifier());
-        } catch (ItemNotFoundException e) {
-            fail("A valid identifier was not found");
+        } catch (Exception exc) {
+            fail("An exception was thrown on a valid identifier: " + exc.getMessage());
+        }
+    }
+
+    @Test
+    public void testFindItemWithInvalidIdentifier() {
+        
+        try {
+            instance.findItem("This is an invalid identifier");
+            fail("Exception was not thrown when it should have");
+        } catch (ItemNotFoundException exc) {
+            assertTrue("The exception message was wrong", exc.getMessage().contains("not found"));
+        } catch (Exception exc) {
+            fail("Wrong exception was thrown: " + exc.getMessage());
+        }
+    }
+
+    @Test
+    public void testServerDownException() {
+        try {
+            instance.findItem("ServerDownTest");
+        } catch (ServerDownException exc) {
+            assertTrue("The exception message was wrong", exc.getMessage().contains("server is down"));
+        } catch (Exception exc) {
+            fail("Wrong exception was thrown: " + exc.getMessage());
         }
     }
 }

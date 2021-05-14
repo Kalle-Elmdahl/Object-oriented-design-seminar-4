@@ -3,7 +3,7 @@ package se.kth.iv1350.seminar4.model;
 import se.kth.iv1350.seminar4.DTO.ItemDTO;
 
 /**
- * 
+ * This class is used for storing items the customer has bought.
  */
 public class Item {
     String name;

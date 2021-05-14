@@ -44,14 +44,18 @@ public class EISHandler {
      * This function gets the correct item from the external inventory system based on an idenfier
      * @param identifier the item's identifier
      * @return ItemDTO the found item
-     * @throws ItemNotFoundException
+     * @throws ItemNotFoundException When identifier parameter is invalid 
+     * @throws ServerDownException When the server is down
      */
-    public ItemDTO findItem(String identifier) throws ItemNotFoundException {
+    public ItemDTO findItem(String identifier) throws ItemNotFoundException, ServerDownException {
+        if(identifier.equals("ServerDownTest")) 
+            throw new ServerDownException("The server is down");
+        
         for (ItemDTO item : items)
             if(item.getIdentifier().equals(identifier)) 
                 return item;
             
-        throw new ItemNotFoundException("An item with the specified identifier was not found.");
+        throw new ItemNotFoundException("An item with the specified identifier was not found. The provided identifier: " + identifier);
     }
 
     

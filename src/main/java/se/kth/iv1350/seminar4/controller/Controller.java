@@ -3,6 +3,10 @@ package se.kth.iv1350.seminar4.controller;
 import se.kth.iv1350.seminar4.model.Sale;
 import se.kth.iv1350.seminar4.model.Receipt;
 import se.kth.iv1350.seminar4.model.Register;
+import se.kth.iv1350.seminar4.model.SaleObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import se.kth.iv1350.seminar4.DTO.*;
 import se.kth.iv1350.seminar4.integration.*;
@@ -16,6 +20,8 @@ public class Controller {
     private EASHandler eas;
     private Printer printer;
     private Register register;
+
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * This function generates a new instance of the controller
@@ -39,6 +45,8 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
+        for(SaleObserver obs : saleObservers)
+            sale.addSaleObserver(obs);
     }
     
     /** 
@@ -46,13 +54,18 @@ public class Controller {
      * @param identifier The item's identifier. This must be valid. Invalid identifiers are not handled
      * @return SaleInfoDTO Information to be shown on the screen in the view
      * @throws ItemNotFoundException When the scanned identifier is invalid 
+     * @throws ServerDownException When the external server is down
      */
-    public SaleInfoDTO enterItem(String identifier) throws ItemNotFoundException {
+    public SaleInfoDTO enterItem(String identifier) throws ItemNotFoundException, ServerDownException {
         if(sale.isDuplicate(identifier))
             return sale.addDuplicate(identifier);
-
-        ItemDTO item = eis.findItem(identifier);
-        return sale.addItem(item);
+        try {
+            ItemDTO item = eis.findItem(identifier);
+            return sale.addItem(item);
+        } catch (ItemNotFoundException | ServerDownException exc) {
+            System.out.println("[FOR DEVELOPER]: " + exc.getMessage());
+            throw exc;
+        }
     }
 
     
@@ -85,4 +98,14 @@ public class Controller {
         this.sale = null;
     }
     
+
+    /**
+     * The specified observer will be notified when a rental has been paid. There will be
+     * notifications only for rentals that are started after this method is called.
+     *
+     * @param obs The observer to notify.
+     */
+    public void addSaleObserver(SaleObserver obs) {
+        saleObservers.add(obs);
+    }
 }

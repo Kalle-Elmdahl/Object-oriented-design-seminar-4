@@ -57,8 +57,8 @@ public class ControllerTest {
             SaleInfoDTO test = instance.enterItem("identifier1");
             double runningTotal = test.getRunningTotal();
             assertEquals("Add duplicate is not working", 59.4, runningTotal, .1);
-        } catch (ItemNotFoundException e) {
-            fail("A valid identifier was not found");
+        } catch (Exception exc) {
+            fail("An exception was thrown on a valid identifier: " + exc.getMessage());
         }
     }
 
@@ -71,8 +71,8 @@ public class ControllerTest {
             SaleInfoDTO secondOfSame = instance.enterItem(identifier);
             int quantity = secondOfSame.getCurrentItemQuantity();
             assertEquals("Add Multiple of same item is not working", 2, quantity);
-        } catch (ItemNotFoundException e) {
-            fail("A valid identifier was not found");
+        } catch (Exception exc) {
+            fail("An exception was thrown on a valid identifier: " + exc.getMessage());
         }
     }
 
@@ -83,8 +83,8 @@ public class ControllerTest {
             instance.enterItem("identifier1");
             double change = instance.pay(90, "SEK");
             assertEquals("Calculation of change is not working", 90 - 59.4, change, .01);
-        } catch (ItemNotFoundException e) {
-            fail("A valid identifier was not found");
+        } catch (Exception exc) {
+            fail("An exception was thrown on a valid identifier: " + exc.getMessage());
         }
     }
 }

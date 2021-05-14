@@ -2,6 +2,7 @@ package se.kth.iv1350.seminar4.view;
 
 import se.kth.iv1350.seminar4.controller.Controller;
 import se.kth.iv1350.seminar4.integration.ItemNotFoundException;
+import se.kth.iv1350.seminar4.integration.ServerDownException;
 
 /**
  * This is a pleaceholder for the real view. It contains a hardcoded execution with calls to all 
@@ -17,6 +18,8 @@ public class View {
      */
     public View(Controller contr) {
         this.contr = contr;
+        contr.addSaleObserver(new TotalRevenueView());
+        contr.addSaleObserver(new TotalRevenueFileOutput());
     }
 
     /**
@@ -30,6 +33,8 @@ public class View {
             System.out.println("Added an item with identifier: identifier1");
         } catch (ItemNotFoundException e) {
             System.err.println("Could not find item");
+        } catch (ServerDownException e) {
+            System.err.println("The server is down right now, please try again later :)");
         }
         contr.pay(500, "SEK");
         System.out.println("A payment of 500 SEK was made");
