@@ -44,13 +44,14 @@ public class EISHandler {
      * This function gets the correct item from the external inventory system based on an idenfier
      * @param identifier the item's identifier
      * @return ItemDTO the found item
+     * @throws ItemNotFoundException
      */
-    public ItemDTO findItem(String identifier) {
+    public ItemDTO findItem(String identifier) throws ItemNotFoundException {
         for (ItemDTO item : items)
             if(item.getIdentifier().equals(identifier)) 
                 return item;
             
-        return null;
+        throw new ItemNotFoundException("An item with the specified identifier was not found.");
     }
 
     

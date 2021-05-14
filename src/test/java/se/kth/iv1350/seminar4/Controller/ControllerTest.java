@@ -13,6 +13,7 @@ import se.kth.iv1350.seminar4.integration.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ControllerTest {
     private Controller instance;
@@ -52,26 +53,38 @@ public class ControllerTest {
     @Test
     public void addItem() {
         instance.startSale();
-        SaleInfoDTO test = instance.enterItem("identifier1");
-        double runningTotal = test.getRunningTotal();
-        assertEquals("Add duplicate is not working", 59.4, runningTotal, .1);
+        try {
+            SaleInfoDTO test = instance.enterItem("identifier1");
+            double runningTotal = test.getRunningTotal();
+            assertEquals("Add duplicate is not working", 59.4, runningTotal, .1);
+        } catch (ItemNotFoundException e) {
+            fail("A valid identifier was not found");
+        }
     }
 
     @Test
     public void addMultipleOfSame() {
         instance.startSale();
         String identifier = "identifier1";
-        instance.enterItem(identifier);
-        SaleInfoDTO secondOfSame = instance.enterItem(identifier);
-        int quantity = secondOfSame.getCurrentItemQuantity();
-        assertEquals("Add Multiple of same item is not working", 2, quantity);
+        try {
+            instance.enterItem(identifier);
+            SaleInfoDTO secondOfSame = instance.enterItem(identifier);
+            int quantity = secondOfSame.getCurrentItemQuantity();
+            assertEquals("Add Multiple of same item is not working", 2, quantity);
+        } catch (ItemNotFoundException e) {
+            fail("A valid identifier was not found");
+        }
     }
 
     @Test
     public void checkIfChangeIsCalculatedCorrectly() {
         instance.startSale();
-        instance.enterItem("identifier1");
-        double change = instance.pay(90, "SEK");
-        assertEquals("Calculation of change is not working", 90 - 59.4, change, .01);
+        try {
+            instance.enterItem("identifier1");
+            double change = instance.pay(90, "SEK");
+            assertEquals("Calculation of change is not working", 90 - 59.4, change, .01);
+        } catch (ItemNotFoundException e) {
+            fail("A valid identifier was not found");
+        }
     }
 }

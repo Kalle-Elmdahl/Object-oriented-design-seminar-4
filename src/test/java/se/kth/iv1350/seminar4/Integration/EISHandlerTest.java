@@ -6,8 +6,10 @@ import org.junit.Test;
 
 import se.kth.iv1350.seminar4.DTO.*;
 import se.kth.iv1350.seminar4.integration.EISHandler;
+import se.kth.iv1350.seminar4.integration.ItemNotFoundException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class EISHandlerTest {
     private EISHandler instance;
@@ -32,11 +34,16 @@ public class EISHandlerTest {
             "Tomater Krossade EKO", 
             "identifier2"
         );
-        ItemDTO foundItem = instance.findItem("identifier2");
-        assertEquals("Find item did not find correct item", foundItem.getName(), itemWithIdentifierTwo.getName());
-        assertEquals("Find item did not find correct item", foundItem.getVAT(), itemWithIdentifierTwo.getVAT(), .01);
-        assertEquals("Find item did not find correct item", foundItem.getPrice(), itemWithIdentifierTwo.getPrice(), .01);
-        assertEquals("Find item did not find correct item", foundItem.getDescription(), itemWithIdentifierTwo.getDescription());
-        assertEquals("Find item did not find correct item", foundItem.getIdentifier(), itemWithIdentifierTwo.getIdentifier());
+        
+        try {
+            ItemDTO foundItem = instance.findItem("identifier2");
+            assertEquals("Find item did not find correct item", foundItem.getName(), itemWithIdentifierTwo.getName());
+            assertEquals("Find item did not find correct item", foundItem.getVAT(), itemWithIdentifierTwo.getVAT(), .01);
+            assertEquals("Find item did not find correct item", foundItem.getPrice(), itemWithIdentifierTwo.getPrice(), .01);
+            assertEquals("Find item did not find correct item", foundItem.getDescription(), itemWithIdentifierTwo.getDescription());
+            assertEquals("Find item did not find correct item", foundItem.getIdentifier(), itemWithIdentifierTwo.getIdentifier());
+        } catch (ItemNotFoundException e) {
+            fail("A valid identifier was not found");
+        }
     }
 }

@@ -45,8 +45,9 @@ public class Controller {
      * Adds an item to a sale.
      * @param identifier The item's identifier. This must be valid. Invalid identifiers are not handled
      * @return SaleInfoDTO Information to be shown on the screen in the view
+     * @throws ItemNotFoundException When the scanned identifier is invalid 
      */
-    public SaleInfoDTO enterItem(String identifier) {
+    public SaleInfoDTO enterItem(String identifier) throws ItemNotFoundException {
         if(sale.isDuplicate(identifier))
             return sale.addDuplicate(identifier);
 
