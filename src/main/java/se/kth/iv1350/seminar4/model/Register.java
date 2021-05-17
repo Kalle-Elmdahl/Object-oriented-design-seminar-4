@@ -33,5 +33,6 @@ public class Register {
      */
     public void updateAmount(double amount) {
         this.amount += amount;
+        System.out.println("[LOG]: The amount in register has been updated, there is now " + amount + " in the register");
     }
 }

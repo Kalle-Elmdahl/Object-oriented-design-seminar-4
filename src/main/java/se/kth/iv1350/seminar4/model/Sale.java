@@ -100,14 +100,12 @@ public class Sale {
     }
 
     public void applyDiscounts(List<DiscountDTO> discounts) {
-        System.out.print("[LOG]: applying discount for sale. Price before is " + totalPrice);
         for (DiscountDTO discount : discounts) {
             if(discount.getAmount() < 1)
                 totalPrice *= 1 - discount.getAmount();
             else
                 totalPrice -= discount.getAmount();
         }
-        System.out.println(" and is now " + totalPrice);
     }
 
     

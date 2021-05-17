@@ -42,7 +42,7 @@ public class View {
         }
 
         System.out.println("\n\n\n===================\nApplying discounts\n===================");
-        contr.applyDiscounts();
+        System.out.println("The total price is now " + contr.applyDiscounts());
 
         System.out.println("\n\n\n===================\nCompleting  sale\n===================");
         double change = contr.pay(500, "SEK");
@@ -54,7 +54,7 @@ public class View {
         contr.startSale();
         System.out.println("A new sale has been started.");
 
-        ArrayList<String> customersItems = new ArrayList();
+        ArrayList<String> customersItems = new ArrayList<String>();
         customersItems.add("identifier1");
         customersItems.add("identifier1");
         customersItems.add("identifier1");
@@ -77,7 +77,7 @@ public class View {
         }
 
         System.out.println("\n\n\n===================\nApplying discounts\n===================");
-        contr.applyDiscounts();
+        System.out.println("The total price is now " + contr.applyDiscounts());
 
         System.out.println("\n\n\n===================\nCompleting  sale\n===================");
         change = contr.pay(500, "SEK");

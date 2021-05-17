@@ -41,12 +41,10 @@ public class Item {
     }
 
     public void applyDiscount(DiscountDTO discount) {
-        System.out.print("[LOG]: applying discount for item: " + name + " (" + identifier + ") price was: " + price);
         if(discount.getAmount() < 1)
             price *= 1 - discount.getAmount();
         else
             price -= discount.getAmount();
-        System.out.println(" and is now " + price);
     }
 
     

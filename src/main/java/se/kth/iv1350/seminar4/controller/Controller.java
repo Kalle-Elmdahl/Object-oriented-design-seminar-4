@@ -72,7 +72,12 @@ public class Controller {
         }
     }
 
-    public void applyDiscounts() {
+    /**
+     * This function adds discounts based on what the customer has purchased
+     * @return the newly updated running total
+     */
+
+    public double applyDiscounts() {
         SaleDTO saleDTO = sale.convertToDTO();
         List<DiscountDTO> itemDiscounts = dc.findDiscounts(saleDTO, new Itemdiscount());
         List<DiscountDTO> saleDiscounts = dc.findDiscounts(saleDTO, new SaleDiscount());
@@ -80,7 +85,7 @@ public class Controller {
 
         sale.applyItemDiscounts(itemDiscounts);
         sale.applyDiscounts(saleDiscounts);
-
+        return sale.getTotalPrice();
     }
 
     

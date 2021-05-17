@@ -13,6 +13,6 @@ public class EASHandler {
      * @param sale The sale containing items and date 
      */
     public void registerPayment(PaymentDTO payment, SaleDTO sale) {
-        System.out.println("[LOG] Regestering payment");
+        System.out.println("[LOG]: Regestering payment");
     }
 }
