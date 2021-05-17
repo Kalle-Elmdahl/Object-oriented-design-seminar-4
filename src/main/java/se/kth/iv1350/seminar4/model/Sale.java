@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.iv1350.seminar4.DTO.*;
-import se.kth.iv1350.seminar4.model.SaleObserver;
 
 /**
  * One single sale made by one single customer and payed with one payment.
@@ -88,6 +87,27 @@ public class Sale {
      */
     public SaleDTO convertToDTO() {
         return new SaleDTO(this.saleTime, this.items, this.totalPrice, this.totalVAT);
+    }
+
+    public void applyItemDiscounts(List<DiscountDTO> discounts) {
+        for(DiscountDTO discount : discounts) {
+            for(Item item : items) {
+                if(item.getIdentifier().equals(discount.getIdOfDiscountedItem()))
+                    item.applyDiscount(discount);
+            }
+        }
+        updateRunningTotal();
+    }
+
+    public void applyDiscounts(List<DiscountDTO> discounts) {
+        System.out.print("[LOG]: applying discount for sale. Price before is " + totalPrice);
+        for (DiscountDTO discount : discounts) {
+            if(discount.getAmount() < 1)
+                totalPrice *= 1 - discount.getAmount();
+            else
+                totalPrice -= discount.getAmount();
+        }
+        System.out.println(" and is now " + totalPrice);
     }
 
     

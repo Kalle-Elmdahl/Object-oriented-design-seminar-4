@@ -24,8 +24,9 @@ public class ViewTest {
         EASHandler eas = new EASHandler();
         EISHandler eis = new EISHandler();
         Printer printer = new Printer();
+        DCHandler dc = new DCHandler();
 
-        Controller contr = new Controller(eis, eas, printer);
+        Controller contr = new Controller(eis, eas, printer, dc);
         instanceToTest = new View(contr);
 
         printOutBuffer = new ByteArrayOutputStream();

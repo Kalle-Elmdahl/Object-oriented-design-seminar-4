@@ -13,6 +13,6 @@ public class Printer {
      * @param receipt
      */
     public void printReceipt(Receipt receipt) {
-        System.out.println("Printing receipt");
+        System.out.println("[LOG] Printing receipt");
     }
 }

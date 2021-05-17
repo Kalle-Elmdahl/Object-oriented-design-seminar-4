@@ -30,8 +30,9 @@ public class ControllerTest {
         EASHandler eas = new EASHandler();
         EISHandler eis = new EISHandler();
         Printer printer = new Printer();
+        DCHandler dc = new DCHandler();
 
-        instance = new Controller(eis, eas, printer);
+        instance = new Controller(eis, eas, printer, dc);
 
     }
 

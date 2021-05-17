@@ -64,6 +64,6 @@ public class EISHandler {
      * @param sale the completed sale in a data transfer object
      */
     public void updateInventory(SaleDTO sale) {
-        System.out.println("updating inventory");
+        System.out.println("[LOG] updating inventory");
     }
 }

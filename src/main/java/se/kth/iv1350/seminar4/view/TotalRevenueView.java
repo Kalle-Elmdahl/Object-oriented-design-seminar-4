@@ -14,6 +14,8 @@ class TotalRevenueView implements SaleObserver {
 
     public void newSale(double priceOfPurchase) {
         totalRevenue += priceOfPurchase;
+        System.out.println("--- A message from TotalRevenueobserver ---");
         System.out.println("The total revenue since the program started is: " + totalRevenue);
+        System.out.println("-------------------------------------------");
     }
 }

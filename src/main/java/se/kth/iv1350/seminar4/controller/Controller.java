@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.iv1350.seminar4.DTO.*;
+import se.kth.iv1350.seminar4.discount.Itemdiscount;
+import se.kth.iv1350.seminar4.discount.SaleDiscount;
 import se.kth.iv1350.seminar4.integration.*;
 
 /**
@@ -19,6 +21,7 @@ public class Controller {
     private EISHandler eis;
     private EASHandler eas;
     private Printer printer;
+    private DCHandler dc;
     private Register register;
 
     private List<SaleObserver> saleObservers = new ArrayList<>();
@@ -30,10 +33,11 @@ public class Controller {
      * @param printer a printer for printing receipts
      */
 
-    public Controller(EISHandler eis, EASHandler eas, Printer printer) {
+    public Controller(EISHandler eis, EASHandler eas, Printer printer, DCHandler dc) {
         this.eis = eis;
         this.eas = eas;
         this.printer = printer;
+        this.dc = dc;
 
         this.register = new Register();
 
@@ -66,6 +70,17 @@ public class Controller {
             System.out.println("[FOR DEVELOPER]: " + exc.getMessage());
             throw exc;
         }
+    }
+
+    public void applyDiscounts() {
+        SaleDTO saleDTO = sale.convertToDTO();
+        List<DiscountDTO> itemDiscounts = dc.findDiscounts(saleDTO, new Itemdiscount());
+        List<DiscountDTO> saleDiscounts = dc.findDiscounts(saleDTO, new SaleDiscount());
+        System.out.println("[LOG]: Found " + itemDiscounts.size() + " item discounts and " + saleDiscounts.size() + " sale discounts");
+
+        sale.applyItemDiscounts(itemDiscounts);
+        sale.applyDiscounts(saleDiscounts);
+
     }
 
     
