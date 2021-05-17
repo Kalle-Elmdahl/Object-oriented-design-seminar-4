@@ -1,19 +1,23 @@
 package se.kth.iv1350.seminar4.model;
 
 /**
- * This is a virtual register. Used for keeping track of the money in the register
+ * The register is a singleton class and therefore is accessed by the getInstance function
  */
 public class Register {
     double amount;
 
-    /**
-     * This function generates a new instance of a register.
-     */
-    public Register() {
+    private Register() {
         this.amount = 1000;
     }
-
     
+    private static class RegisterHolder {
+      private static Register instance = new Register();
+    } 
+  
+    public static Register getInstance() {
+      return RegisterHolder.instance;
+    }
+
     /** 
      * Returns the amount in register.
      * @return double: the amount of money in the register.

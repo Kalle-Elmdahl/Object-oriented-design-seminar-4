@@ -39,7 +39,7 @@ public class Controller {
         this.printer = printer;
         this.dc = dc;
 
-        this.register = new Register();
+        this.register = Register.getInstance();
 
         System.out.println("Controller was started successfully");
     }

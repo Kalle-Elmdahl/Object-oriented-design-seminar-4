@@ -13,7 +13,7 @@ public class RegisterTest {
 
     @Before
     public void setUp() {
-        instance = new Register();
+        instance = Register.getInstance();
     }
 
     @After
