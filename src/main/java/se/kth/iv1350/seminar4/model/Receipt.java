@@ -17,6 +17,11 @@ public class Receipt {
     private String currency;
     private String storeInformation = "ICA Brottbyhallen. Handla online på ICA.se - Här finns nya fantastiska erbjudanden varje dag!";
 
+    /**
+     * Genreates a new instance of the receipt
+     * @param payment The customer's payment
+     * @param sale The customer's sale
+     */
     public Receipt(PaymentDTO payment, SaleDTO sale) {
         this.timeOfSale = sale.getTime();
         this.items = sale.getItems();

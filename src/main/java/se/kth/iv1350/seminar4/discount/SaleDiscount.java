@@ -7,7 +7,8 @@ import se.kth.iv1350.seminar4.DTO.DiscountDTO;
 import se.kth.iv1350.seminar4.DTO.SaleDTO;
 
 /**
- * SaleDiscount
+ * SaleDiscount This class implements the Discountfinder class and finds discounts that can be added
+ * to the whole sale.
  */
 public class SaleDiscount implements DiscountFinder {
 

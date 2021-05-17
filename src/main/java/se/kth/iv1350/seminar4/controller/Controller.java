@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.iv1350.seminar4.DTO.*;
-import se.kth.iv1350.seminar4.discount.Itemdiscount;
+import se.kth.iv1350.seminar4.discount.ItemDiscount;
 import se.kth.iv1350.seminar4.discount.SaleDiscount;
 import se.kth.iv1350.seminar4.integration.*;
 
@@ -74,12 +74,12 @@ public class Controller {
 
     /**
      * This function adds discounts based on what the customer has purchased
-     * @return the newly updated running total
+     * @return double the newly updated running total
      */
 
     public double applyDiscounts() {
         SaleDTO saleDTO = sale.convertToDTO();
-        List<DiscountDTO> itemDiscounts = dc.findDiscounts(saleDTO, new Itemdiscount());
+        List<DiscountDTO> itemDiscounts = dc.findDiscounts(saleDTO, new ItemDiscount());
         List<DiscountDTO> saleDiscounts = dc.findDiscounts(saleDTO, new SaleDiscount());
         System.out.println("[LOG]: Found " + itemDiscounts.size() + " item discounts and " + saleDiscounts.size() + " sale discounts");
 

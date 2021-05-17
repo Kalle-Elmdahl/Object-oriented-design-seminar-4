@@ -40,6 +40,10 @@ public class Item {
         quantity = item.getQuantity();
     }
 
+    /**
+     * updates the price of the item based on a discount
+     * @param discount the discount to be added to the item's price
+     */
     public void applyDiscount(DiscountDTO discount) {
         if(discount.getAmount() < 1)
             price *= 1 - discount.getAmount();

@@ -13,7 +13,11 @@ public class Register {
     private static class RegisterHolder {
       private static Register instance = new Register();
     } 
-  
+    
+    /**
+     * This function gets the register.
+     * @return Register the register
+     */
     public static Register getInstance() {
       return RegisterHolder.instance;
     }

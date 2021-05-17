@@ -6,8 +6,11 @@ import java.util.List;
 import se.kth.iv1350.seminar4.DTO.DiscountDTO;
 import se.kth.iv1350.seminar4.DTO.SaleDTO;
 import se.kth.iv1350.seminar4.model.Item;
-
-public class Itemdiscount implements DiscountFinder {
+/**
+ * ItemDiscount This class implements the Discountfinder class and finds discounts that can be added
+ * to specific items.
+ */
+public class ItemDiscount implements DiscountFinder {
 
     @Override
     public List<DiscountDTO> findDiscount(SaleDTO saleDTO, List<DiscountDTO> availableDiscounts) {

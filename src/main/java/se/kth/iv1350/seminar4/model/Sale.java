@@ -89,6 +89,10 @@ public class Sale {
         return new SaleDTO(this.saleTime, this.items, this.totalPrice, this.totalVAT);
     }
 
+    /**
+     * Updates the sale's item prices based on a number of discounts
+     * @param discounts the valid discounts to be added to the sale's items
+     */
     public void applyItemDiscounts(List<DiscountDTO> discounts) {
         for(DiscountDTO discount : discounts) {
             for(Item item : items) {
@@ -99,6 +103,10 @@ public class Sale {
         updateRunningTotal();
     }
 
+    /**
+     * Updates the sale's total price based on a number of discounts
+     * @param discounts the valid discounts to be added to the sale's price
+     */
     public void applyDiscounts(List<DiscountDTO> discounts) {
         for (DiscountDTO discount : discounts) {
             if(discount.getAmount() < 1)
