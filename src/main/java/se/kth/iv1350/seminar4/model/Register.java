@@ -5,21 +5,18 @@ package se.kth.iv1350.seminar4.model;
  */
 public class Register {
     double amount;
+    private static final Register register = new Register();
 
     private Register() {
         this.amount = 1000;
     }
-    
-    private static class RegisterHolder {
-      private static Register instance = new Register();
-    } 
     
     /**
      * This function gets the register.
      * @return Register the register
      */
     public static Register getInstance() {
-      return RegisterHolder.instance;
+      return register;
     }
 
     /** 
