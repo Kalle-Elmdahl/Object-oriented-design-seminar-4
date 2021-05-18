@@ -5,7 +5,7 @@ package se.kth.iv1350.seminar4.model;
  */
 public class Register {
     double amount;
-    private static final Register register = new Register();
+    private static final Register REGISTER = new Register();
 
     private Register() {
         this.amount = 1000;
@@ -16,7 +16,7 @@ public class Register {
      * @return Register the register
      */
     public static Register getInstance() {
-      return register;
+      return REGISTER;
     }
 
     /** 

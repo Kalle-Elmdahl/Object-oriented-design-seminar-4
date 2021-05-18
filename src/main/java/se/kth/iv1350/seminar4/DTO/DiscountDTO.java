@@ -4,7 +4,7 @@ package se.kth.iv1350.seminar4.DTO;
  * DiscountDTO This class is used for sending discounts throughout the program
  */
 public class DiscountDTO {
-    private final String type;
+    private String type;
     private String idOfDiscountedItem;
     private double amount;
     private double minRequiredPrice;
