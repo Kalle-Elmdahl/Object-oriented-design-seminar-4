@@ -108,12 +108,9 @@ public class Sale {
      * @param discounts the valid discounts to be added to the sale's price
      */
     public void applyDiscounts(List<DiscountDTO> discounts) {
-        for (DiscountDTO discount : discounts) {
-            if(discount.getAmount() < 1)
-                totalPrice *= 1 - discount.getAmount();
-            else
-                totalPrice -= discount.getAmount();
-        }
+        for (DiscountDTO discount : discounts)
+            totalPrice = discount.getAmount() < 1 ? totalPrice * 1 - discount.getAmount() : totalPrice - discount.getAmount();
+    
     }
 
     

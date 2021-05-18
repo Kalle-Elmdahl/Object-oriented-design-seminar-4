@@ -45,10 +45,7 @@ public class Item {
      * @param discount the discount to be added to the item's price
      */
     public void applyDiscount(DiscountDTO discount) {
-        if(discount.getAmount() < 1)
-            price *= 1 - discount.getAmount();
-        else
-            price -= discount.getAmount();
+        price = discount.getAmount() < 1 ? price * 1 - discount.getAmount() : price - discount.getAmount();
     }
 
     
